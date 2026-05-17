@@ -196,7 +196,7 @@ export default function Home() {
           <tbody>
             {rows.map((r, i) => (
               <tr key={i} style={{ borderTop: "0.5px solid #eee", background: r.unavailable ? "#fafafa" : i === 0 ? "rgba(16,185,129,.04)" : "#fff", cursor: r.unavailable ? "default" : "pointer" }}
-                onClick={() => window.open(r.url, "_blank")}>
+                onClick={() => !r.unavailable && setModal(r)}>
                 <td style={{ padding: "0.75rem 1rem", borderLeft: i === 0 && !r.unavailable ? "3px solid #10b981" : "3px solid transparent" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 10, opacity: r.unavailable ? 0.45 : 1 }}>
                     <div style={{ width: 36, height: 36, borderRadius: 8, background: r.bg, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 10, fontWeight: 500, color: r.color, border: "0.5px solid #eee", flexShrink: 0 }}>{r.short}</div>
@@ -224,7 +224,7 @@ export default function Home() {
                 </td>
                 <td style={{ padding: "0.75rem 1rem" }}>
                   {!r.unavailable && (
-                    <button onClick={() => window.open(r.url, "_blank")}}
+                    <button onClick={(e) => { e.stopPropagation(); setModal(r); }}
                       style={{ fontSize: 11, padding: "5px 12px", borderRadius: 6, border: "0.5px solid #ddd", background: "transparent", cursor: "pointer", fontFamily: "Georgia, serif" }}>
                       დეტალები
                     </button>
