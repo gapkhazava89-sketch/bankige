@@ -1,10 +1,8 @@
 const fs = require('fs');
 let c = fs.readFileSync('app/page.tsx', 'utf8');
-c = c.replace(/https:\/\/www\.tbcbank[^"]*/g, '/tbc.svg');
-c = c.replace(/https:\/\/www\.procreditbank[^"]*/g, '/pro.svg');
-c = c.replace(/https:\/\/bankofgeorgia[^"]*/g, '/bog.svg');
-c = c.replace(/https:\/\/www\.basisbank[^"]*/g, '/bas.svg');
-c = c.replace(/https:\/\/libertybank[^"]*/g, '/lib.svg');
-c = c.replace(/https:\/\/www\.credobank[^"]*/g, '/cre.svg');
+c = c.replace(
+  /onClick=\{.*?setModal\(r\).*?\}/g,
+  'onClick={() => window.open(r.url, "_blank")}'
+);
 fs.writeFileSync('app/page.tsx', c);
 console.log('done');
